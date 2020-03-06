@@ -13,7 +13,7 @@ func _ready():
 		
 		var layer = CanvasLayer.new()
 		layer.follow_viewport_enable = true
-		layer.follow_viewport_scale = 1 - (i)*0.04
+		layer.follow_viewport_scale = 1 - (i)*0.03
 		layer.layer =-i
 		#layer.scale *= layer.follow_viewport_scale
 		print(layer.follow_viewport_scale)
