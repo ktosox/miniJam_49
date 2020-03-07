@@ -22,8 +22,3 @@ func _on_Button_pressed():
 	pass # Replace with function body.
 
 
-func _on_Button2_pressed():
-	var ID = GM.generate_item()
-	print(ID)
-	print(GM.itemList[ID])
-	pass # Replace with function body.

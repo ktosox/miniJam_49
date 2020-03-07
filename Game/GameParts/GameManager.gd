@@ -117,8 +117,10 @@ func generate_item():
 func item_ID_to_stats():
 	pass
 
-func item_ID_to_look():
-	pass
+func item_ID_to_look(ID):
+	var req_item = itemList[ID]
+	var output  = [req_item[5],req_item[6]]
+	return output
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
