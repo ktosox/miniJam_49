@@ -1,22 +1,21 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://GameParts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Particles/Bar_thick.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Particles/Core.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Particles/Orb.png" type="Texture" id=4]
+[ext_resource path="res://GameParts/Background.tscn" type="PackedScene" id=5]
 
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 4.52195
-height = 5.37132
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 4 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 4 )
 
-[sub_resource type="CircleShape2D" id=7]
-radius = 8.0
+[sub_resource type="CircleShape2D" id=3]
+radius = 9.0
 
-[sub_resource type="Animation" id=1]
-resource_name = "Left"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
 tracks/0/interp = 1
@@ -30,8 +29,7 @@ tracks/0/keys = {
 "values": [ -80.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Right"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
 tracks/0/interp = 1
@@ -45,8 +43,7 @@ tracks/0/keys = {
 "values": [ 80.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Stop"
+[sub_resource type="Animation" id=6]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
@@ -64,67 +61,81 @@ tracks/0/keys = {
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="Background" parent="." instance=ExtResource( 5 )]
+
 [node name="Neck" type="PinJoint2D" parent="."]
 rotation = -3.14159
-node_a = NodePath("../Core")
+node_a = NodePath("../Leg")
 node_b = NodePath("../Head")
-disable_collision = false
 
 [node name="Ass" type="GrooveJoint2D" parent="."]
 node_a = NodePath("../Leg")
 node_b = NodePath("../Core")
+bias = 0.472
 disable_collision = false
-length = 30.0
-initial_offset = 5.0
+length = 20.0
+initial_offset = 10.0
 
 [node name="Head" type="RigidBody2D" parent="."]
-position = Vector2( 0, -20 )
+position = Vector2( 0, 8 )
 mass = 2.0
 gravity_scale = -10.0
 linear_damp = 6.0
 angular_damp = 5.0
 
-[node name="Camera2D" type="Camera2D" parent="Head"]
-position = Vector2( 0, 20 )
-current = true
-zoom = Vector2( 4, 4 )
-
 [node name="Core" type="Sprite" parent="Head"]
+visible = false
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Head"]
-shape = SubResource( 5 )
+shape = SubResource( 1 )
+disabled = true
 
 [node name="Core" type="RigidBody2D" parent="."]
+position = Vector2( 0, -4 )
 mass = 15.0
-gravity_scale = -3.0
+gravity_scale = 9.0
 angular_damp = 60.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Core"]
-shape = SubResource( 6 )
+shape = SubResource( 2 )
 
 [node name="Bar" type="Sprite" parent="Core"]
+modulate = Color( 1, 0, 0, 1 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 
 [node name="Leg" type="RigidBody2D" parent="."]
-position = Vector2( 0, 20.1562 )
-mass = 30.0
+position = Vector2( 0, 20 )
+mass = 40.0
 gravity_scale = 60.0
+contacts_reported = 2
+contact_monitor = true
 linear_damp = 3.0
 __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="Camera2D" type="Camera2D" parent="Leg"]
+position = Vector2( 0, 8 )
+current = true
+zoom = Vector2( 4, 4 )
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Leg"]
-shape = SubResource( 7 )
+shape = SubResource( 3 )
 
 [node name="Orb" type="Sprite" parent="Leg"]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 4 )
 
 [node name="Movement" type="AnimationPlayer" parent="."]
-anims/Left = SubResource( 1 )
-anims/Right = SubResource( 3 )
-anims/Stop = SubResource( 2 )
+anims/Left = SubResource( 4 )
+anims/Right = SubResource( 5 )
+anims/Stop = SubResource( 6 )
+
+[node name="TimerJump" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+[connection signal="body_entered" from="Leg" to="." method="_on_Leg_body_entered"]
+[connection signal="timeout" from="TimerJump" to="." method="_on_TimerJump_timeout"]

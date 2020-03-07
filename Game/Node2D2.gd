@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 
 
 # Declare member variables here. Examples:
@@ -25,13 +25,4 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if(Input.is_action_pressed("ui_left")):
-		$Camera2D.position.x-=delta*600
-	if(Input.is_action_pressed("ui_right")):
-		$Camera2D.position.x+=delta*600
-	if(Input.is_action_pressed("ui_up")):
-		$Camera2D.position.y-=delta*600
-	if(Input.is_action_pressed("ui_down")):
-		$Camera2D.position.y+=delta*600
-	pass
+

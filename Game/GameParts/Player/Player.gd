@@ -5,14 +5,39 @@ extends Node2D
 # var a = 2
 # var b = "text"
 export var horizontalDir = 0.0
+var jumpReady = true
+var jumpCD = true
+var currentShift = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 func _input(event):
-	if(event.is_action_pressed("jump") and $Leg.linear_velocity.y >-6):
-		$Leg.linear_velocity.y-=290
-
+	if(event.is_action_pressed("jump") and jumpReady and jumpCD):
+		$Leg.linear_velocity.y-=260
+		jumpReady = false
+		jumpCD = false
+		$TimerJump.start()
+	if(event.is_action_pressed("shiftFast")):
+		if(!currentShift == 1):
+			SM.shift_start(true)
+			currentShift = 1
+			$Leg.gravity_scale = 20.0
+		else:
+			SM.shift_stop()
+			currentShift = 0
+			$Leg.gravity_scale = 60.0
+		pass
+	if(event.is_action_pressed("shiftSlow")):
+		if(!currentShift == -1):
+			SM.shift_start(false)
+			currentShift = -1
+			$Leg.gravity_scale=100.0
+		else:
+			SM.shift_stop()
+			$Leg.gravity_scale = 60.0
+			currentShift = 0
+		pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,4 +59,15 @@ func _process(delta):
 
 func _on_Timer_timeout():
 	print($Core.linear_velocity.y)
+	pass # Replace with function body.
+
+
+func _on_Leg_body_entered(body):
+	if(body.get_collision_layer_bit(5)):
+		jumpReady = true
+	pass # Replace with function body.
+
+
+func _on_TimerJump_timeout():
+	jumpCD = true
 	pass # Replace with function body.
