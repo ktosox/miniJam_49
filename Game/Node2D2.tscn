@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Node2D2.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Particles/Orb.png" type="Texture" id=3]
 [ext_resource path="res://GameParts/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GameParts/Junk/Crate.tscn" type="PackedScene" id=5]
+[ext_resource path="res://GameParts/Enemies/FloaterFiona.tscn" type="PackedScene" id=6]
+[ext_resource path="res://GameParts/Junk/Barrel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://GameParts/Junk/Box.tscn" type="PackedScene" id=8]
+[ext_resource path="res://GameParts/Attacks/Bullet.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -59,3 +64,39 @@ autoplay = "New Anim"
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 684.195, -36.5717 )
+
+[node name="Crate4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 224, 8 )
+
+[node name="FloaterFiona" parent="." instance=ExtResource( 6 )]
+position = Vector2( 808, -32 )
+
+[node name="FloaterFiona2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 896, -40 )
+
+[node name="FloaterFiona3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1064, -56 )
+
+[node name="FloaterFiona4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 978.432, -49.1744 )
+
+[node name="Crate" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1177.64, -37.4129 )
+
+[node name="Crate2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1150.44, -35.2077 )
+
+[node name="Crate3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1161.47, -57.2604 )
+
+[node name="Barrel" parent="." instance=ExtResource( 7 )]
+position = Vector2( 300.415, -6.75085 )
+
+[node name="Barrel2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 316.744, -47.5731 )
+
+[node name="Barrel3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 335.406, 1.4136 )
+
+[node name="Bullet" parent="." instance=ExtResource( 9 )]
+position = Vector2( 456, -16 )

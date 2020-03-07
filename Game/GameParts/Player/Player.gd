@@ -9,6 +9,8 @@ var jumpReady = true
 var jumpCD = true
 var currentShift = 0
 
+var pauseMenuScene = preload("res://GameParts/PauseMenu.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -38,8 +40,14 @@ func _input(event):
 			$Leg.gravity_scale = 60.0
 			currentShift = 0
 		pass
-
-
+	if(event.is_action_pressed("attack")):
+		$Missile.global_position = $Leg.global_position
+		$Missile.global_rotation = $Leg.global_rotation
+		$Missile.fire($Leg/MissileTarget.position)
+	if(event.is_action_pressed("ui_cancel")):
+		menu()
+		pass
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(Input.is_action_pressed("left") and !Input.is_action_pressed("right")):
@@ -67,6 +75,12 @@ func _on_Leg_body_entered(body):
 		jumpReady = true
 	pass # Replace with function body.
 
+
+func menu():
+	var pauseMenu = pauseMenuScene.instance()
+	$Leg/Camera2D.add_child(pauseMenu)
+	get_tree().paused = true
+	pass
 
 func _on_TimerJump_timeout():
 	jumpCD = true
