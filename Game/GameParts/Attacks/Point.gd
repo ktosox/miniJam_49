@@ -1,11 +1,11 @@
-extends RigidBody2D
+extends Area2D
 
-var dropScene = preload("res://GameParts/Junk/PickUp.tscn")
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var season
+var damange
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +15,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-func drop_item():
-	var item_ID = GM.generate_item()
-	
+
+func pop():
+	$Animator.play("End")
 	pass
+
+func get_damange():
+	var obj = [damange,season]
+	return obj
+

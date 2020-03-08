@@ -50,13 +50,19 @@ var gradientAut = preload("res://Resources/Colors/gradient_Aut.tres")
 var gradientSum = preload("res://Resources/Colors/gradient_Sum.tres")
 var gradientWin = preload("res://Resources/Colors/gradient_Win.tres")
 
+var player = null
 
 var itemList = {} # keeps pairs 
 
 var lastID = 60
+
+var playerEQ = [1,0,0,0,0]
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	addBoxCuter()
 	randomize()
+	playerEQ[2]=generate_item()
+	playerEQ[1]=generate_item()
 	pass # Replace with function body.
 func get_gradient(pos:int):
 	match pos:
@@ -114,13 +120,28 @@ func generate_item():
 	itemList[ID]=newItem
 	return ID
 
-func item_ID_to_stats():
+func update_player_weapon():
+	if(player == null):
+		print("no player lul xD")
+		return
+	
 	pass
 
-func item_ID_to_look(ID):
-	var req_item = itemList[ID]
-	var output  = [req_item[5],req_item[6]]
-	return output
+func ID_to_item(ID):
+	return itemList[ID]
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+func addBoxCuter():
+	var item = []
+	item.push_back(-1) #season
+	item.push_back(0) # type
+	item.push_back(1)# dmg
+	item.push_back(1)# CD
+	item.push_back(-1) # ammo
+	item.push_back(Color(1,1,1,1)) # color
+	item.push_back(load("res://Resources/Particles/Core.png"))
+	item.push_back("box-cutter")
+	itemList[1]=item
+	pass

@@ -57,10 +57,11 @@ __meta__ = {
 }
 
 [node name="ItemSlot" parent="CanvasLayer2/Layout/Panel" instance=ExtResource( 2 )]
-margin_left = 25.418
-margin_top = 17.978
-margin_right = -45.582
-margin_bottom = -45.022
+margin_left = 32.3406
+margin_top = 32.6812
+margin_right = -98.6594
+margin_bottom = -90.3188
+isActiveItem = true
 
 [node name="Panel2" type="ColorRect" parent="CanvasLayer2/Layout"]
 margin_left = 346.915
@@ -73,10 +74,11 @@ __meta__ = {
 }
 
 [node name="ItemSlot2" parent="CanvasLayer2/Layout/Panel2" instance=ExtResource( 2 )]
-margin_left = 27.29
-margin_top = 20.999
-margin_right = -43.71
-margin_bottom = -42.001
+margin_left = 36.965
+margin_top = 30.965
+margin_right = -94.035
+margin_bottom = -92.035
+isTrashCan = true
 
 [node name="Panel3" type="ColorRect" parent="CanvasLayer2/Layout"]
 margin_left = 550.525
@@ -88,41 +90,53 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Invetnory" type="GridContainer" parent="CanvasLayer2/Layout"]
-margin_left = 571.664
-margin_top = 282.948
-margin_right = 671.664
-margin_bottom = 694.948
+[node name="Invetnory" type="VBoxContainer" parent="CanvasLayer2/Layout"]
+margin_left = 572.0
+margin_top = 292.0
+margin_right = 598.0
+margin_bottom = 393.0
+rect_scale = Vector2( 4, 4 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ItemSlot1" parent="CanvasLayer2/Layout/Invetnory" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 23.0
+margin_bottom = 21.0
+rect_scale = Vector2( 1, 1 )
+
 [node name="ItemSlot2" parent="CanvasLayer2/Layout/Invetnory" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 80.0
-margin_bottom = 80.0
-
-[node name="ItemSlot" parent="CanvasLayer2/Layout/Invetnory" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 84.0
-margin_right = 80.0
-margin_bottom = 164.0
+margin_left = 3.0
+margin_top = 27.0
+margin_right = 23.0
+margin_bottom = 47.0
+rect_scale = Vector2( 1, 1 )
 
 [node name="ItemSlot3" parent="CanvasLayer2/Layout/Invetnory" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 168.0
-margin_right = 80.0
-margin_bottom = 248.0
+margin_left = 3.0
+margin_top = 53.0
+margin_right = 23.0
+margin_bottom = 73.0
+rect_scale = Vector2( 1, 1 )
 
 [node name="ItemSlot4" parent="CanvasLayer2/Layout/Invetnory" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 252.0
-margin_right = 80.0
-margin_bottom = 332.0
+margin_left = 3.0
+margin_top = 79.0
+margin_right = 23.0
+margin_bottom = 99.0
+rect_scale = Vector2( 1, 1 )
 
 [node name="Preview" type="Panel" parent="CanvasLayer2/Layout"]
 margin_left = 27.0
@@ -148,6 +162,9 @@ gdfgdgdf erere
 dfgdgdf ww545"
 align = 3
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="CanvasLayer2/Layout"]
 margin_left = 539.472
@@ -166,3 +183,4 @@ margin_bottom = 696.149
 rect_scale = Vector2( 4, 4 )
 text = "trash can"
 [connection signal="pressed" from="CanvasLayer2/Layout/Button" to="." method="_on_Button_pressed"]
+[connection signal="minimum_size_changed" from="CanvasLayer2/Layout/Panel/ItemSlot" to="." method="_on_ItemSlot_minimum_size_changed"]

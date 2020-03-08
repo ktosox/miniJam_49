@@ -3,11 +3,17 @@ extends TextureRect
 var item_preview_scene = load("res://GameParts/Menu/ItemPreview.tscn")
 
 export var item_ID : int
+export var isTrashCan =false
+export var isActiveItem = false
 
 var item_is_dragged = false
 
+
 func _ready():
-	item_ID=GM.generate_item()
+	if(isTrashCan):
+		item_ID = 0
+	else:
+		item_ID=GM.generate_item()
 	update_item()
 
 func get_drag_data(position):
@@ -25,11 +31,15 @@ func get_drag_data(position):
 	return to_return
 
 func can_drop_data(position, data):
+	if(isTrashCan and data[0]==1):
+		return false
 	return true
 
 func drop_data(position, data):
 	data[1].change_item(item_ID)
 	change_item(data[0])
+	if(isActiveItem):
+		emit_signal("minimum_size_changed")
 
 func drag_ended(): #called when player is no longer dragging preview
 	item_is_dragged = false
@@ -40,13 +50,15 @@ func update_item(): # change item details
 		texture = null
 		self_modulate = Color(1,1,1,1)
 	else:
-		var look = GM.item_ID_to_look(item_ID)
-		self_modulate = look[0]
-		texture = look[1]
+		var look = GM.ID_to_item(item_ID)
+		self_modulate = look[5]
+		texture = look[6]
 	updateHint()
 
 func change_item(newID): #set new item ID as input, calls update_item()
 	item_ID = newID
+	if(isTrashCan):
+		item_ID = 0
 	update_item()
 
 func updateHint():

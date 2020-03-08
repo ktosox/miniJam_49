@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 
 
 # Declare member variables here. Examples:
@@ -14,3 +14,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+func fire(player:bool,dmg,season):
+	$Point.damange = dmg
+	$Point.season = season
+	if (player):
+		$Point.set_collision_layer_bit(2,true)
+	else:
+		$Point.set_collision_layer_bit(4,true)
+	pass
+	

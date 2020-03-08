@@ -7,13 +7,13 @@
 [ext_resource path="res://Resources/Particles/Grid_full.png" type="Texture" id=5]
 [ext_resource path="res://GameParts/Attacks/Explosion.gd" type="Script" id=6]
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=1]
 radius = 48.0
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0.432954 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=3]
 resource_name = "Boom"
 length = 0.8
 tracks/0/type = "value"
@@ -55,8 +55,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "End"
+[sub_resource type="Animation" id=4]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Trail:emitting")
@@ -96,9 +95,32 @@ tracks/2/keys = {
 "method": "play"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Trail:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
-[sub_resource type="Animation" id=3]
-resource_name = "Fly"
+[sub_resource type="Animation" id=5]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -132,10 +154,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false, true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Animator:current_animation")
@@ -149,14 +171,38 @@ tracks/3/keys = {
 "update": 2,
 "values": [ "End" ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Trail:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=6]
 height = 12.0
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=7]
 _data = [ Vector2( 0.149425, 0.998864 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.695454 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=8]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="Missile" type="Path2D"]
@@ -172,7 +218,7 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Progress/Explosion"]
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Progress/Explosion"]
@@ -189,10 +235,10 @@ spread = 0.0
 gravity = Vector2( 0, 0 )
 radial_accel = -4.31
 scale_amount = 4.0
-scale_amount_curve = SubResource( 8 )
+scale_amount_curve = SubResource( 2 )
 
 [node name="Animator" type="AnimationPlayer" parent="Progress/Explosion"]
-anims/Boom = SubResource( 9 )
+anims/Boom = SubResource( 3 )
 
 [node name="Core" type="Area2D" parent="Progress"]
 collision_layer = 4
@@ -201,15 +247,16 @@ script = ExtResource( 2 )
 
 [node name="Animator" type="AnimationPlayer" parent="Progress/Core"]
 playback_speed = 1.6
-anims/End = SubResource( 2 )
-anims/Fly = SubResource( 3 )
+anims/End = SubResource( 4 )
+anims/Fly = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Progress/Core"]
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 disabled = true
 
 [node name="Trail" type="CPUParticles2D" parent="Progress"]
+modulate = Color( 1, 1, 1, 0 )
 emitting = false
 amount = 16
 lifetime = 2.0
@@ -225,8 +272,8 @@ angle = 224.4
 angle_random = 0.66
 scale_amount = 9.0
 scale_amount_random = 1.0
-scale_amount_curve = SubResource( 5 )
-color_ramp = SubResource( 6 )
+scale_amount_curve = SubResource( 7 )
+color_ramp = SubResource( 8 )
 __meta__ = {
 "_editor_description_": ""
 }

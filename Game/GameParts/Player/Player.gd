@@ -8,11 +8,16 @@ export var horizontalDir = 0.0
 var jumpReady = true
 var jumpCD = true
 var currentShift = 0
+var currentWeaponID = 1
+
 
 var pauseMenuScene = preload("res://GameParts/PauseMenu.tscn")
 
+var bulletScene = preload("res://GameParts/Attacks/Bullet.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GM.player = self
 	pass # Replace with function body.
 func _input(event):
 	if(event.is_action_pressed("jump") and jumpReady and jumpCD):
@@ -64,6 +69,9 @@ func _process(delta):
 		$Leg.linear_velocity.y+=delta*260
 	pass
 
+
+func change_weapon():
+	pass
 
 func _on_Timer_timeout():
 	print($Core.linear_velocity.y)
