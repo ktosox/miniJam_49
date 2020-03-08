@@ -16,6 +16,18 @@ func _ready():
 #func _process(delta):
 #	pass
 func drop_item():
-	var item_ID = GM.generate_item()
-	
+	var new_drop = dropScene.instance()
+	new_drop.item_ID = GM.generate_item()
+	new_drop.global_position = global_position
+	new_drop.update_drop()
+	get_parent().add_child(new_drop)
 	pass
+
+
+func _on_HitBox_area_entered(area):
+	$HitBox/CollisionShape2D.disabled = true
+	area.pop()
+	drop_item()
+	$Die.play("Anim")
+	
+	pass # Replace with function body.

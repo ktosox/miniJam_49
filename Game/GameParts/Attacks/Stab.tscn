@@ -5,17 +5,17 @@
 [ext_resource path="res://GameParts/Attacks/Melee.gd" type="Script" id=3]
 [ext_resource path="res://Resources/Particles/Bar_diagonal.png" type="Texture" id=4]
 
-[sub_resource type="RayShape2D" id=5]
+[sub_resource type="RayShape2D" id=1]
 length = 90.0
 
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.591954, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0727272 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.45977, 0.295455 ), 0.0, 0.0, 0, 0, Vector2( 0.557471, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0.516556, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.377483, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "anim"
 length = 0.2
 tracks/0/type = "value"
@@ -78,13 +78,12 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee"]
 rotation = 3.14159
 scale = Vector2( 4, 1 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 visible = false
 scale = Vector2( 0.6, 1 )
-emitting = false
 amount = 50
 speed_scale = 3.0
 lifetime_randomness = 0.18
@@ -102,11 +101,11 @@ radial_accel = -30.0
 radial_accel_random = 0.79
 angle = -45.0
 scale_amount = 8.0
-scale_amount_curve = SubResource( 3 )
-color_ramp = SubResource( 2 )
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
 
 [node name="Attack" type="AnimationPlayer" parent="."]
-anims/anim = SubResource( 6 )
+anims/anim = SubResource( 4 )
 
 [node name="Tip" type="Node2D" parent="."]
 visible = false

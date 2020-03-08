@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends StaticBody2D
 
 
 # Declare member variables here. Examples:
@@ -14,12 +14,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-func fire(player:bool,dmg,season,delay=0):
-	$Point.damange = dmg
-	$Point.season = season
-	if (player):
-		$Point.set_collision_layer_bit(2,true)
-	else:
-		$Point.set_collision_layer_bit(4,true)
+func open_part_2():
+	for x in 4:
+		for y in 10:
+			$TileMap.set_cell(x+35,y+30,-1)
 	pass
-	
+
+
+func _on_Crate_tree_exited():
+	open_part_2()
+	pass # Replace with function body.

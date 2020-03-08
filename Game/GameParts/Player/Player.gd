@@ -33,22 +33,23 @@ func _input(event):
 		else:
 			SM.shift_stop()
 			currentShift = 0
-			$Leg.gravity_scale = 60.0
+			$Leg.gravity_scale = 80.0
 		pass
 	if(event.is_action_pressed("shiftSlow")):
 		if(!currentShift == -1):
 			SM.shift_start(false)
 			currentShift = -1
-			$Leg.gravity_scale=100.0
+			$Leg.gravity_scale=120.0
 		else:
 			SM.shift_stop()
-			$Leg.gravity_scale = 60.0
+			$Leg.gravity_scale = 80.0
 			currentShift = 0
 		pass
 	if(event.is_action_pressed("attack")):
-		$Missile.global_position = $Leg.global_position
-		$Missile.global_rotation = $Leg.global_rotation
-		$Missile.fire($Leg/MissileTarget.position)
+		#$Missile.global_position = $Leg.global_position
+		#$Missile.global_rotation = $Leg.global_rotation
+		#$Missile.fire($Leg/MissileTarget.position)
+		$Leg/Slice.attack()
 	if(event.is_action_pressed("ui_cancel")):
 		menu()
 		pass

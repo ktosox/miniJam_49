@@ -12,7 +12,10 @@ func _ready():
 	
 	pass # Replace with function body.
 
-
+func attack():
+	var bullet = bulletScene.instance()
+	
+	get_parent().add_child(bullet)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

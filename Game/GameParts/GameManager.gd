@@ -45,10 +45,10 @@ var postfix = [
 	"pi"
 	]
 
-var gradientSpr = preload("res://Resources/Colors/gradient_Spr.tres")
-var gradientAut = preload("res://Resources/Colors/gradient_Aut.tres")
-var gradientSum = preload("res://Resources/Colors/gradient_Sum.tres")
-var gradientWin = preload("res://Resources/Colors/gradient_Win.tres")
+export var gradientSpr = preload("res://Resources/Colors/gradient_Spr.tres")
+export var gradientAut = preload("res://Resources/Colors/gradient_Aut.tres")
+export var gradientSum = preload("res://Resources/Colors/gradient_Sum.tres")
+export var gradientWin = preload("res://Resources/Colors/gradient_Win.tres")
 
 var player = null
 
@@ -133,6 +133,12 @@ func ID_to_item(ID):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+func reset_game():
+	playerEQ = [1,0,0,0,0]
+	itemList.clear()
+	addBoxCuter()
+	pass
+
 func addBoxCuter():
 	var item = []
 	item.push_back(-1) #season
