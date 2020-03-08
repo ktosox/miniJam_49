@@ -139,6 +139,10 @@ func reset_game():
 	addBoxCuter()
 	pass
 
+func end_game():
+	player.lose()
+	pass
+
 func addBoxCuter():
 	var item = []
 	item.push_back(-1) #season

@@ -13,6 +13,8 @@ var currentWeaponID = 1
 
 var pauseMenuScene = preload("res://GameParts/PauseMenu.tscn")
 
+var endGameScene = preload("res://GameParts/EndGame.tscn")
+
 var bulletScene = preload("res://GameParts/Attacks/Bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -56,6 +58,7 @@ func _input(event):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+
 	if(Input.is_action_pressed("left") and !Input.is_action_pressed("right")):
 		if(!$Movement.current_animation=="Left"):
 			$Movement.play("Left")
@@ -84,12 +87,19 @@ func _on_Leg_body_entered(body):
 		jumpReady = true
 	pass # Replace with function body.
 
+func real_pos():
+	return $Leg.global_position
 
 func menu():
 	var pauseMenu = pauseMenuScene.instance()
 	$Leg/Camera2D.add_child(pauseMenu)
 	get_tree().paused = true
 	pass
+
+func lose():
+	var endGame = endGameScene.instance()
+	$Leg/Camera2D.add_child(endGame)
+	get_tree().paused = true
 
 func _on_TimerJump_timeout():
 	jumpCD = true

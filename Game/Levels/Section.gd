@@ -21,7 +21,7 @@ func placeholder_replace(): # replaces placeholder tiles with stuff
 			match $TileMap.get_cell(x,y) :
 				1:
 					$TileMap.set_cell(x,y,-1) # remove placholder tile
-					#add function for enemy placement here
+					spawn_enemy($TileMap.map_to_world(Vector2(x,y)*4))
 				2:
 					$TileMap.set_cell(x,y,-1) # remove placholder tile
 					spawn_junk($TileMap.map_to_world(Vector2(x,y)*4))
@@ -46,6 +46,9 @@ func spawn_junk(pos):
 	pass
 	
 func spawn_enemy(pos):
+	var enemy = enemy1Scene.instance()
+	enemy.global_position = pos
+	add_child(enemy)
 	pass
 
 func spawn_loot(pos):

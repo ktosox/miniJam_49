@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Control
 
 
 # Declare member variables here. Examples:
@@ -14,19 +14,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-func open_part_2():
-	for x in 4:
-		for y in 10:
-			$TileMap.set_cell(x+35,y+30,-1)
-	pass
 
 
-
-func _on_Crate_tree_exited():
-	open_part_2()
-	pass # Replace with function body.
-
-
-func _on_Start_body_entered(body):
-	get_parent().start_game()
+func _on_Button_pressed():
+	GM.reset_game()
 	pass # Replace with function body.

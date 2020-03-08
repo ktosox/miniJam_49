@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GameParts/EndGame.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "New Anim"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Polygon2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Button:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="EndGame" type="Control"]
+pause_mode = 2
+anchor_right = 0.25
+anchor_bottom = 0.25
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2( 0.25, 0.25 )
+transform = Transform2D( 0.25, 0, 0, 0.25, 0, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 12, 12 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 0, 64, 64, 64, 64, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+autoplay = "New Anim"
+playback_speed = 0.4
+"anims/New Anim" = SubResource( 1 )
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+visible = false
+margin_left = 224.0
+margin_top = 352.0
+margin_right = 300.0
+margin_bottom = 372.0
+rect_scale = Vector2( 4, 4 )
+text = "try again? "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_Button_pressed"]
