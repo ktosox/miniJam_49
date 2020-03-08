@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Particles/Circle.png" type="Texture" id=1]
 [ext_resource path="res://GameParts/Attacks/Bullet.gd" type="Script" id=2]
 [ext_resource path="res://GameParts/Attacks/Point.gd" type="Script" id=3]
+[ext_resource path="res://Resources/Particles/Core.png" type="Texture" id=4]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.109195, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.844828, 0.0409091 ), 0.0, 0.0, 0, 0 ]
@@ -55,11 +56,11 @@ tracks/2/keys = {
 collision_layer = 0
 collision_mask = 0
 mass = 6.0
-gravity_scale = 0.0
+gravity_scale = 0.2
 script = ExtResource( 2 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-emitting = false
+visible = false
 amount = 9
 lifetime = 0.4
 local_coords = false
@@ -89,4 +90,13 @@ anims/End = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Point"]
 shape = SubResource( 3 )
-disabled = true
+
+[node name="TimerDelay" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Core" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+[connection signal="timeout" from="TimerDelay" to="." method="_on_TimerDelay_timeout"]

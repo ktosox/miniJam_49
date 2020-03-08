@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Resources/Particles/Grid_full.png" type="Texture" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.45977, 0.245455 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.437086, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 2
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 144, 640 )
+
+[node name="EndWall" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -160, 0 )
+scale = Vector2( 4, 8 )
+amount = 160
+lifetime = 5.0
+speed_scale = 2.0
+local_coords = false
+texture = ExtResource( 1 )
+emission_shape = 2
+emission_rect_extents = Vector2( 5, 70 )
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 150, 0 )
+initial_velocity = 5.0
+angular_velocity = 224.52
+tangential_accel = -4.3
+damping = 4.3
+angle = -92.9
+angle_random = 1.0
+scale_amount = 6.0
+scale_amount_random = 0.74
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 128, 0 )
+scale = Vector2( 1, 2 )
+texture = SubResource( 4 )
+texture_scale = Vector2( -0.005, 1 )
+polygon = PoolVector2Array( -64, -320, -64, 320, -384, 320, -384, -320 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2( -184, 0 )
+scale = Vector2( 1, 2 )
+color = Color( 0, 0, 0, 1 )
+texture_scale = Vector2( -0.006, 1 )
+polygon = PoolVector2Array( -64, -320, -64, 320, -384, 320, -384, -320 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 74
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -272, 0 )
+shape = SubResource( 5 )

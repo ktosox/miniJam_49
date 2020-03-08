@@ -73,6 +73,7 @@ attack={
 2d_physics/layer_5="Enemy Attack"
 2d_physics/layer_6="Wall"
 2d_physics/layer_7="Crate"
+2d_physics/layer_8="Death"
 
 [rendering]
 

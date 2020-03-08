@@ -14,12 +14,19 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-func fire(player:bool,dmg,season,delay=0):
+func fire(player:bool,dmg,season,delay=2):
 	$Point.damange = dmg
 	$Point.season = season
+	$TimerDelay.start(0)
 	if (player):
 		$Point.set_collision_layer_bit(2,true)
 	else:
 		$Point.set_collision_layer_bit(4,true)
 	pass
 	
+	
+
+
+func _on_TimerDelay_timeout():
+	apply_central_impulse(Vector2(1200,0))
+	pass # Replace with function body.
