@@ -6,16 +6,15 @@
 [ext_resource path="res://Resources/Particles/arrow.png" type="Texture" id=4]
 [ext_resource path="res://GameParts/Attacks/Slice.gd" type="Script" id=5]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 24.0
 height = 16.0
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.377483, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "anim"
+[sub_resource type="Animation" id=3]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("CPUParticles2D:emitting")
@@ -77,7 +76,7 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee"]
 position = Vector2( 0, -32 )
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
@@ -103,7 +102,7 @@ damping = 100.0
 angle = -236.6
 angle_random = 0.19
 scale_amount = 3.0
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -130,4 +129,4 @@ texture = ExtResource( 2 )
 
 [node name="Attack" type="AnimationPlayer" parent="."]
 playback_speed = 1.6
-anims/anim = SubResource( 1 )
+anims/anim = SubResource( 3 )

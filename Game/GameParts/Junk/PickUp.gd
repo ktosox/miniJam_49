@@ -22,5 +22,6 @@ func update_drop():
 
 func _on_PickUp_body_entered(body):
 	if(GM.playerEQ.count(0)>0):
+		GM.update_player_weapon(item_ID)
 		self.queue_free()
 	pass # Replace with function body.

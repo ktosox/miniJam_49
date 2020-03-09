@@ -28,7 +28,7 @@ func update_description():
 	pass
 
 func _on_Button_pressed():
-	GM.update_player_weapon()
+	#GM.update_player_weapon()
 	get_tree().paused=false
 	self.queue_free()
 	pass # Replace with function body.

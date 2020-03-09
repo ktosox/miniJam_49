@@ -2,6 +2,9 @@ extends StaticBody2D
 
 #top left corner : 0:-18
 #bottom right corner: 90:39
+var loadFlag = true
+
+var progress = 0
 
 var crateScene = preload("res://GameParts/Junk/Crate.tscn")
 var boxScene = preload("res://GameParts/Junk/Box.tscn")
@@ -10,25 +13,32 @@ var enemy1Scene = preload("res://GameParts/Enemies/FloaterFiona.tscn")
 
 func _ready():
 	randomize()
-	placeholder_replace()
+	
 	pass # Replace with function body.
 
-func placeholder_replace(): # replaces placeholder tiles with stuff
-	for x in 90 :
-		for y in range(60):
-			y -=18
 
-			match $TileMap.get_cell(x,y) :
-				1:
-					$TileMap.set_cell(x,y,-1) # remove placholder tile
-					spawn_enemy($TileMap.map_to_world(Vector2(x,y)*4))
-				2:
-					$TileMap.set_cell(x,y,-1) # remove placholder tile
-					spawn_junk($TileMap.map_to_world(Vector2(x,y)*4))
-				3:
-					$TileMap.set_cell(x,y,-1) # remove placholder tile
-					spawn_loot($TileMap.map_to_world(Vector2(x,y)*4))
-					pass
+
+func _process(delta):
+	if(progress<91):
+		placeholder_replace()
+	pass
+
+func placeholder_replace(): # replaces placeholder tiles with stuff
+	for y in range(60):
+		y -=18
+
+		match $TileMap.get_cell(progress,y) :
+			1:
+				$TileMap.set_cell(progress,y,-1) # remove placholder tile
+				spawn_enemy($TileMap.map_to_world(Vector2(progress,y)*4))
+			2:
+				$TileMap.set_cell(progress,y,-1) # remove placholder tile
+				spawn_junk($TileMap.map_to_world(Vector2(progress,y)*4))
+			3:
+				$TileMap.set_cell(progress,y,-1) # remove placholder tile
+				spawn_loot($TileMap.map_to_world(Vector2(progress,y)*4))
+				pass
+	progress +=1
 	pass
 
 func spawn_junk(pos):
@@ -56,3 +66,10 @@ func spawn_loot(pos):
 	loot.global_position = pos
 	add_child(loot)
 	pass
+
+
+func _on_Enter_body_entered(body):
+	if(loadFlag):
+		loadFlag = false
+		get_parent().section_reached(self)
+	pass # Replace with function body.

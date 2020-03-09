@@ -84,6 +84,7 @@ disabled = true
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 visible = false
 scale = Vector2( 0.6, 1 )
+emitting = false
 amount = 50
 speed_scale = 3.0
 lifetime_randomness = 0.18

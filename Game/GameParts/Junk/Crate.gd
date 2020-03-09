@@ -18,9 +18,10 @@ func _ready():
 func drop_item():
 	var new_drop = dropScene.instance()
 	new_drop.item_ID = GM.generate_item()
-	new_drop.global_position = global_position
 	new_drop.update_drop()
+	new_drop.global_position = global_position - get_parent().global_position
 	get_parent().add_child(new_drop)
+	print(global_position, new_drop.global_position)
 	pass
 
 

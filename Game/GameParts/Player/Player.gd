@@ -9,7 +9,8 @@ var jumpReady = true
 var jumpCD = true
 var currentShift = 0
 var currentWeaponID = 1
-
+var currentWeapon
+export var attackReady = true
 
 var pauseMenuScene = preload("res://GameParts/PauseMenu.tscn")
 
@@ -20,10 +21,11 @@ var bulletScene = preload("res://GameParts/Attacks/Bullet.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GM.player = self
+	change_weapon()
 	pass # Replace with function body.
 func _input(event):
 	if(event.is_action_pressed("jump") and jumpReady and jumpCD):
-		$Leg.linear_velocity.y-=260
+		$Leg.linear_velocity.y-=360
 		jumpReady = false
 		jumpCD = false
 		$TimerJump.start()
@@ -31,27 +33,37 @@ func _input(event):
 		if(!currentShift == 1):
 			SM.shift_start(true)
 			currentShift = 1
-			$Leg.gravity_scale = 20.0
+			$Leg.gravity_scale = 0.5
 		else:
 			SM.shift_stop()
 			currentShift = 0
-			$Leg.gravity_scale = 80.0
+			$Leg.gravity_scale = 2.0
 		pass
 	if(event.is_action_pressed("shiftSlow")):
 		if(!currentShift == -1):
 			SM.shift_start(false)
 			currentShift = -1
-			$Leg.gravity_scale=120.0
+			$Leg.gravity_scale=4.0
 		else:
 			SM.shift_stop()
-			$Leg.gravity_scale = 80.0
+			$Leg.gravity_scale = 2.0
 			currentShift = 0
 		pass
-	if(event.is_action_pressed("attack")):
+	if(event.is_action_pressed("attack") and attackReady):
+
+		attackReady = false
 		#$Missile.global_position = $Leg.global_position
 		#$Missile.global_rotation = $Leg.global_rotation
 		#$Missile.fire($Leg/MissileTarget.position)
-		$Leg/Slice.attack()
+		$Attack.playback_speed = currentWeapon[3]
+		$Attack.play("Anim")
+		match currentWeapon[1]:
+			0:
+				$Leg/Stab.attack()
+			1:
+				$Leg/Slice.attack()
+			2:
+				pass
 	if(event.is_action_pressed("ui_cancel")):
 		menu()
 		pass
@@ -70,11 +82,21 @@ func _process(delta):
 			$Movement.play("Stop")
 	$Leg.linear_velocity.x = horizontalDir*6
 	if($Leg.linear_velocity.y<0):
-		$Leg.linear_velocity.y+=delta*260
+		$Leg.linear_velocity.y+=delta*220
 	pass
 
 
 func change_weapon():
+	currentWeapon = GM.ID_to_item(currentWeaponID)
+	$Head/Core.texture = currentWeapon[6]
+	$Head/Core.modulate = currentWeapon[5]
+	match currentWeapon[1]:
+		0:
+			$Leg/Stab.set_stats(currentWeapon[2],currentWeapon[0],currentWeapon[5])
+		1:
+			$Leg/Slice.set_stats(currentWeapon[2],currentWeapon[0],currentWeapon[5])
+		2:
+			pass
 	pass
 
 func _on_Timer_timeout():

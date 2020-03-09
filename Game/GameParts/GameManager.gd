@@ -50,6 +50,7 @@ export var gradientAut = preload("res://Resources/Colors/gradient_Aut.tres")
 export var gradientSum = preload("res://Resources/Colors/gradient_Sum.tres")
 export var gradientWin = preload("res://Resources/Colors/gradient_Win.tres")
 
+
 var player = null
 
 var itemList = {} # keeps pairs 
@@ -83,7 +84,7 @@ func generate_item():
 	var newItem=[]
 	var pointPool = 20
 	newItem.push_back(-1+randi()%4) #set season
-	newItem.push_back(randi()%3) # set weapon type
+	newItem.push_back(randi()%2) # set weapon type
 	newItem.push_back(1+randi()%3) # set dmg
 	pointPool -= newItem[2]*3
 	newItem.push_back((pointPool-randf()*4)/(pointPool-newItem[2]*2)) # set CD
@@ -120,11 +121,12 @@ func generate_item():
 	itemList[ID]=newItem
 	return ID
 
-func update_player_weapon():
+func update_player_weapon(ID):
 	if(player == null):
 		print("no player lul xD")
 		return
-	
+	player.currentWeaponID = ID
+	player.change_weapon()
 	pass
 
 func ID_to_item(ID):
@@ -137,6 +139,8 @@ func reset_game():
 	playerEQ = [1,0,0,0,0]
 	itemList.clear()
 	addBoxCuter()
+	get_tree().change_scene("res://GameCore.tscn")
+	get_tree().paused=false
 	pass
 
 func end_game():

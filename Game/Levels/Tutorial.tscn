@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Levels/Tutorial.gd" type="Script" id=2]
-[ext_resource path="res://GameParts/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://GameParts/Junk/Box.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Resources/Fonts/the-bewlay/TheBewlay.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://GameParts/Junk/Crate.tscn" type="PackedScene" id=6]
@@ -34,9 +33,6 @@ tile_data = PoolIntArray( -1179564, 0, 0, -1179563, 0, 1, -1179562, 0, 1, -11795
 __meta__ = {
 "_editor_description_": ""
 }
-
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1216, 176 )
 
 [node name="Box" parent="." instance=ExtResource( 4 )]
 position = Vector2( 464, 352 )
