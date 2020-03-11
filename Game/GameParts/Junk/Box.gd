@@ -18,7 +18,7 @@ func _ready():
 
 func _on_HitBox_area_entered(area):
 	HP -= area.get_damange()[0]
-	if(HP<0):
+	if(HP<1):
 		$Die.play("New Anim")
 	area.pop()
 	pass # Replace with function body.

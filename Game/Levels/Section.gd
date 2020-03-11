@@ -56,9 +56,10 @@ func spawn_junk(pos):
 	pass
 	
 func spawn_enemy(pos):
-	var enemy = enemy1Scene.instance()
-	enemy.global_position = pos
-	add_child(enemy)
+	if(randf()>0.1):
+		var enemy = enemy1Scene.instance()
+		enemy.global_position = pos
+		add_child(enemy)
 	pass
 
 func spawn_loot(pos):

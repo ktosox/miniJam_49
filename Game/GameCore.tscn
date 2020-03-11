@@ -17,7 +17,7 @@ script = ExtResource( 2 )
 position = Vector2( 1536, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 224, -8 )
+position = Vector2( 216, 0 )
 
 [node name="EndWall" parent="." instance=ExtResource( 3 )]
 position = Vector2( 60, 168 )

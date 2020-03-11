@@ -1,24 +1,21 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://GameParts/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Particles/Bar_thick.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Particles/Core.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Particles/Orb.png" type="Texture" id=4]
 [ext_resource path="res://GameParts/Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Resources/Particles/Bar_diagonal.png" type="Texture" id=6]
 [ext_resource path="res://GameParts/Attacks/Stab.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GameParts/Attacks/Slice.tscn" type="PackedScene" id=8]
+[ext_resource path="res://GameParts/Player/Leg.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 4 )
-
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 16.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
 tracks/0/interp = 1
@@ -31,8 +28,20 @@ tracks/0/keys = {
 "update": 3,
 "values": [ -80.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:applied_torque")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ 60.0 ]
+}
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
 tracks/0/interp = 1
@@ -45,8 +54,20 @@ tracks/0/keys = {
 "update": 3,
 "values": [ 80.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:applied_torque")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ -60.0 ]
+}
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
@@ -60,8 +81,20 @@ tracks/0/keys = {
 "update": 3,
 "values": [ 0.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:applied_torque")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ 0.0 ]
+}
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "Anim"
 length = 0.7
 tracks/0/type = "value"
@@ -86,22 +119,24 @@ script = ExtResource( 1 )
 rotation = -3.14159
 node_a = NodePath("../Leg")
 node_b = NodePath("../Head")
+softness = 0.05
 
 [node name="Ass" type="GrooveJoint2D" parent="."]
 node_a = NodePath("../Leg")
 node_b = NodePath("../Core")
-bias = 0.472
+bias = 0.254
 disable_collision = false
 length = 20.0
 initial_offset = 10.0
 
 [node name="Head" type="RigidBody2D" parent="."]
+position = Vector2( 0, 4 )
 collision_layer = 2
 collision_mask = 106
-mass = 2.0
-gravity_scale = -10.0
-linear_damp = 6.0
-angular_damp = 5.0
+mass = 6.0
+gravity_scale = -1.0
+linear_damp = 1.0
+angular_damp = 6.0
 
 [node name="Core" type="Sprite" parent="Head"]
 scale = Vector2( 4, 4 )
@@ -110,40 +145,16 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Head"]
 shape = SubResource( 1 )
 
-[node name="Core" type="RigidBody2D" parent="."]
-visible = false
-position = Vector2( 0, -4 )
-collision_layer = 2
-collision_mask = 106
-mass = 15.0
-gravity_scale = 9.0
-angular_damp = 60.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Core"]
-shape = SubResource( 2 )
-disabled = true
-
-[node name="Bar" type="Sprite" parent="Core"]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -8, 0 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 2 )
-
-[node name="Bar2" type="Sprite" parent="Core"]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 8, 0 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 2 )
-
 [node name="Leg" type="RigidBody2D" parent="."]
 position = Vector2( 0, 24 )
 collision_layer = 2
 collision_mask = 106
 mass = 60.0
-gravity_scale = 2.0
+gravity_scale = 9.0
 contacts_reported = 2
 contact_monitor = true
-linear_damp = 3.0
+linear_damp = 2.0
+script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -161,7 +172,7 @@ current = true
 zoom = Vector2( 4, 4 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Leg"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Orb" type="Sprite" parent="Leg"]
 scale = Vector2( 4, 4 )
@@ -186,15 +197,15 @@ rotation = 1.5708
 texture = ExtResource( 6 )
 
 [node name="Movement" type="AnimationPlayer" parent="."]
-anims/Left = SubResource( 4 )
-anims/Right = SubResource( 5 )
-anims/Stop = SubResource( 6 )
+anims/Left = SubResource( 3 )
+anims/Right = SubResource( 4 )
+anims/Stop = SubResource( 5 )
 
 [node name="TimerJump" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
 
 [node name="Attack" type="AnimationPlayer" parent="."]
-anims/Anim = SubResource( 7 )
+anims/Anim = SubResource( 6 )
 [connection signal="body_entered" from="Leg" to="." method="_on_Leg_body_entered"]
 [connection signal="timeout" from="TimerJump" to="." method="_on_TimerJump_timeout"]

@@ -2,6 +2,7 @@ extends Node2D
 
 
 var section1 = preload("res://Levels/Section1.tscn")
+var section2 = preload("res://Levels/Section2.tscn")
 #var section2 = preload("res://Levels/Section2.tscn")
 
 var sectionList = []
@@ -30,14 +31,18 @@ func start_game():
 func _process(delta):
 	if(started):
 		$EndWall.global_position.x+=delta*modif
-		modif+=delta
+		modif+=delta*0.85
 		if(GM.player.real_pos().x-$EndWall.global_position.x>500):
-			$EndWall.global_position.x+=delta*100
+			$EndWall.global_position.x+=delta*26
 	pass
 
 func section_reached(section):
 	print("new section")
-	var newSec = section1.instance()
+	var newSec 
+	if(randf()>0.5):
+		newSec = section1.instance()
+	else:
+		newSec = section2.instance()
 	newSec.global_position = section.global_position + Vector2(1456,0)
 	sectionList.push_back(newSec)
 	sectionList.front().queue_free()

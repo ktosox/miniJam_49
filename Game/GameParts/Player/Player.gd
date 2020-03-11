@@ -25,7 +25,7 @@ func _ready():
 	pass # Replace with function body.
 func _input(event):
 	if(event.is_action_pressed("jump") and jumpReady and jumpCD):
-		$Leg.linear_velocity.y-=360
+		$Leg.apply_impulse(Vector2(0,-200),Vector2(0,-37000))
 		jumpReady = false
 		jumpCD = false
 		$TimerJump.start()
@@ -80,11 +80,11 @@ func _process(delta):
 	if(!Input.is_action_pressed("left") and !Input.is_action_pressed("right")):
 		if(!$Movement.current_animation=="Stop"):
 			$Movement.play("Stop")
-	$Leg.linear_velocity.x = horizontalDir*6
-	if($Leg.linear_velocity.y<0):
-		$Leg.linear_velocity.y+=delta*220
+	$Leg.move= horizontalDir*5
+
 	pass
 
+	
 
 func change_weapon():
 	currentWeapon = GM.ID_to_item(currentWeaponID)
