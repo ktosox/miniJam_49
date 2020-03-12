@@ -21,14 +21,13 @@ func drop_item():
 	new_drop.update_drop()
 	new_drop.global_position = global_position - get_parent().global_position
 	get_parent().add_child(new_drop)
-	print(global_position, new_drop.global_position)
+
 	pass
 
 
 func _on_HitBox_area_entered(area):
-	$HitBox/CollisionShape2D.disabled = true
+	$HitBox/CollisionShape2D.set_deferred("disabled", true)
 	area.pop()
-	drop_item()
 	$Die.play("Anim")
 	
 	pass # Replace with function body.

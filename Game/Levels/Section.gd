@@ -72,5 +72,5 @@ func spawn_loot(pos):
 func _on_Enter_body_entered(body):
 	if(loadFlag):
 		loadFlag = false
-		get_parent().section_reached(self)
+		get_parent().call_deferred("section_reached",self) 
 	pass # Replace with function body.
