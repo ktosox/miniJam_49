@@ -7,7 +7,7 @@ var section2 = preload("res://Levels/Section2.tscn")
 
 var sectionList = []
 
-var currentSeason = 1
+var currentSeason = 3
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -47,6 +47,11 @@ func section_reached(section):
 	sectionList.push_back(newSec)
 	sectionList.front().queue_free()
 	sectionList.pop_front()
+	newSec.seasonColor = GM.get_gradient(currentSeason).interpolate(0)
+	if currentSeason == 3:
+		currentSeason =0
+	else:
+		currentSeason+=1
 	
 	add_child(newSec)
 	pass

@@ -17,12 +17,13 @@ dof_blur_far_transition = 0.16
 dof_blur_far_quality = 0
 dof_blur_near_enabled = true
 dof_blur_near_distance = 34.04
-dof_blur_near_transition = 43.17
-dof_blur_near_amount = 0.15
+dof_blur_near_transition = 55.06
+dof_blur_near_amount = 0.19
 dof_blur_near_quality = 2
 glow_enabled = true
 glow_intensity = 2.48
-glow_strength = 0.88
+glow_strength = 0.7
+glow_bloom = 0.14
 glow_blend_mode = 0
 glow_hdr_threshold = 0.36
 glow_hdr_luminance_cap = 1.0
@@ -33,13 +34,13 @@ adjustment_brightness = 1.44
 adjustment_contrast = 2.4
 adjustment_saturation = 2.0
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 4 )
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 16.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
 tracks/0/interp = 1
@@ -65,7 +66,7 @@ tracks/1/keys = {
 "values": [ 60.0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
 tracks/0/interp = 1
@@ -91,7 +92,7 @@ tracks/1/keys = {
 "values": [ -60.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:horizontalDir")
@@ -118,8 +119,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "Anim"
+[sub_resource type="Animation" id=7]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:attackReady")
@@ -173,7 +173,7 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Head"]
-shape = SubResource( 7 )
+shape = SubResource( 2 )
 
 [node name="Leg" type="RigidBody2D" parent="."]
 position = Vector2( 0, 24 )
@@ -202,7 +202,7 @@ current = true
 zoom = Vector2( 4, 4 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Leg"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Orb" type="Sprite" parent="Leg"]
 scale = Vector2( 4, 4 )
@@ -227,15 +227,15 @@ rotation = 1.5708
 texture = ExtResource( 6 )
 
 [node name="Movement" type="AnimationPlayer" parent="."]
-anims/Left = SubResource( 3 )
-anims/Right = SubResource( 4 )
-anims/Stop = SubResource( 5 )
+anims/Left = SubResource( 4 )
+anims/Right = SubResource( 5 )
+anims/Stop = SubResource( 6 )
 
 [node name="TimerJump" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
 
 [node name="Attack" type="AnimationPlayer" parent="."]
-anims/Anim = SubResource( 6 )
+anims/Anim = SubResource( 7 )
 [connection signal="body_entered" from="Leg" to="." method="_on_Leg_body_entered"]
 [connection signal="timeout" from="TimerJump" to="." method="_on_TimerJump_timeout"]

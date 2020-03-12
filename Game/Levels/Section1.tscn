@@ -4,7 +4,7 @@
 [ext_resource path="res://Levels/Section.gd" type="Script" id=2]
 [ext_resource path="res://GameParts/Junk/Box.tscn" type="PackedScene" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
 [node name="Section1" type="StaticBody2D"]
@@ -31,7 +31,6 @@ position = Vector2( 984, 392 )
 position = Vector2( 1256, 176 )
 
 [node name="TileMap" type="TileMap" parent="."]
-self_modulate = Color( 0.215686, 0.592157, 0.882353, 1 )
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 4, 4 )
@@ -45,5 +44,5 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enter"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 [connection signal="body_entered" from="Enter" to="." method="_on_Enter_body_entered"]

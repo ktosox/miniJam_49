@@ -11,9 +11,11 @@ var boxScene = preload("res://GameParts/Junk/Box.tscn")
 var barrelScene = preload("res://GameParts/Junk/Barrel.tscn")
 var enemy1Scene = preload("res://GameParts/Enemies/FloaterFiona.tscn")
 
+export var seasonColor = Color(1,1,1,1)
+
 func _ready():
 	randomize()
-	
+	$TileMap.modulate = seasonColor
 	pass # Replace with function body.
 
 

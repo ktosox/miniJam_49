@@ -15,6 +15,7 @@ script = ExtResource( 2 )
 
 [node name="Section1" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1536, 0 )
+seasonColor = Color( 0.921569, 0.647059, 0.168627, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 216, 0 )
