@@ -9,7 +9,7 @@
 
 [sub_resource type="PhysicsMaterial" id=1]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 12
 outline_size = 2
 outline_color = Color( 0.945098, 0, 1, 1 )
@@ -17,7 +17,7 @@ use_filter = true
 extra_spacing_char = 1
 font_data = ExtResource( 5 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 64, 64 )
 
 [node name="Tutorial" type="StaticBody2D"]
@@ -27,7 +27,7 @@ physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
-self_modulate = Color( 0.921569, 0.647059, 0.168627, 1 )
+self_modulate = Color( 0.231373, 0.815686, 0.180392, 1 )
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 4, 4 )
@@ -88,7 +88,7 @@ margin_left = 30.0
 margin_top = -44.0
 margin_right = 150.0
 margin_bottom = -15.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Move with 
   A and D"
@@ -101,7 +101,7 @@ margin_left = 104.0
 margin_top = 98.0
 margin_right = 224.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Attack with S"
 __meta__ = {
@@ -113,7 +113,7 @@ margin_left = 72.0
 margin_top = 170.0
 margin_right = 196.0
 margin_bottom = 199.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Destroy Crates for loot"
 __meta__ = {
@@ -125,7 +125,7 @@ margin_left = 26.0
 margin_top = 24.0
 margin_right = 146.0
 margin_bottom = 38.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Jump with W"
 __meta__ = {
@@ -137,7 +137,7 @@ margin_left = 290.0
 margin_top = 96.0
 margin_right = 410.0
 margin_bottom = 157.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "<-
 exploding 
@@ -152,7 +152,7 @@ margin_left = 292.0
 margin_top = -52.0
 margin_right = 437.0
 margin_bottom = -23.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "the wall of death is coming
                  from the left"
@@ -178,6 +178,6 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Start"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 [connection signal="tree_exited" from="Crate" to="." method="_on_Crate_tree_exited"]
 [connection signal="body_entered" from="Start" to="." method="_on_Start_body_entered"]

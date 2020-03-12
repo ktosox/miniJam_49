@@ -7,7 +7,7 @@ var section2 = preload("res://Levels/Section2.tscn")
 
 var sectionList = []
 
-var currentSeason
+var currentSeason = 1
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
