@@ -209,20 +209,20 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 4 )
 
 [node name="Bar_diagonal" type="Sprite" parent="Leg/Orb"]
-position = Vector2( -3, -3 )
-texture = ExtResource( 6 )
-
-[node name="Bar_diagonal2" type="Sprite" parent="Leg/Orb"]
 position = Vector2( 3, 3 )
 texture = ExtResource( 6 )
 
+[node name="Bar_diagonal2" type="Sprite" parent="Leg/Orb"]
+position = Vector2( -3, -3 )
+texture = ExtResource( 6 )
+
 [node name="Bar_diagonal3" type="Sprite" parent="Leg/Orb"]
-position = Vector2( 3, -3 )
+position = Vector2( -3, 3 )
 rotation = 1.5708
 texture = ExtResource( 6 )
 
 [node name="Bar_diagonal4" type="Sprite" parent="Leg/Orb"]
-position = Vector2( -3, 3 )
+position = Vector2( 3, -3 )
 rotation = 1.5708
 texture = ExtResource( 6 )
 

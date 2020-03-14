@@ -31,9 +31,9 @@ func start_game():
 func _process(delta):
 	if(started):
 		$EndWall.global_position.x+=delta*modif
-		modif+=delta*0.85
-		if(GM.player.real_pos().x-$EndWall.global_position.x>500):
-			$EndWall.global_position.x+=delta*26
+		modif+=delta*0.45
+		if(GM.player.real_pos().x-$EndWall.global_position.x>550):
+			$EndWall.global_position.x+=delta*212
 	pass
 
 func section_reached(section):
